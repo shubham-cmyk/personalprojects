@@ -33,10 +33,15 @@ func getItem(w http.ResponseWriter, r *http.Request) {
 func createItem(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var item Item
+	var item2 Item
 	_ = json.NewDecoder(r.Body).Decode(&item)
-	item.ID = len(items) + 1
-	items = append(items, item)
-	json.NewEncoder(w).Encode(item)
+
+	item2.ID = item.ID
+	item2.Name = item.Name
+	item2.Price = item.Price
+
+	items = append(items, item2)
+	json.NewEncoder(w).Encode(item2)
 }
 
 func updateItem(w http.ResponseWriter, r *http.Request) {
